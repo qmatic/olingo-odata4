@@ -204,7 +204,7 @@ public class Link extends Annotatable {
     }
 
     final Link other = (Link) o;
-    return getAnnotations().equals(other.getAnnotations())
+    return getImmutableAnnotations().equals(other.getImmutableAnnotations())
         && (title == null ? other.title == null : title.equals(other.title))
         && (rel == null ? other.rel == null : rel.equals(other.rel))
         && (href == null ? other.href == null : href.equals(other.href))
@@ -218,7 +218,7 @@ public class Link extends Annotatable {
 
   @Override
   public int hashCode() {
-    int result = getAnnotations().hashCode();
+    int result = getImmutableAnnotations().hashCode();
     result = 31 * result + (title == null ? 0 : title.hashCode());
     result = 31 * result + (rel == null ? 0 : rel.hashCode());
     result = 31 * result + (href == null ? 0 : href.hashCode());

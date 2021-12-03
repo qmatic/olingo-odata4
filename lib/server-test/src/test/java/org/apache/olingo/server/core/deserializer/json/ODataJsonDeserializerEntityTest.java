@@ -1272,7 +1272,7 @@ public class ODataJsonDeserializerEntityTest extends AbstractODataDeserializerTe
         + "{\"PropertyInt16\":789,\"PropertyString\":\"TEST 3\"}]}";
     Entity entity = deserialize(entityString, "ETMixPrimCollComp", ContentType.APPLICATION_JSON);
     assertNotNull(entity);
-    List<Annotation> annotations = entity.getProperty("CollPropertyString").getAnnotations();
+    List<Annotation> annotations = entity.getProperty("CollPropertyString").getImmutableAnnotations();
     assertEquals(1, annotations.size());
     assertEquals("custom.annotation", annotations.get(0).getTerm());
     assertEquals(12, annotations.get(0).getValue());

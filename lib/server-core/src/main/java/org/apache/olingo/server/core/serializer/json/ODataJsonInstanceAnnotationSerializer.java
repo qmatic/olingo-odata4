@@ -85,7 +85,7 @@ public class ODataJsonInstanceAnnotationSerializer {
 	public void writeInstanceAnnotationsOnProperties(final EdmProperty edmProperty, final Property property,
 			final JsonGenerator json) throws IOException, SerializerException, DecoderException {
 		if (property != null) {
-			for (Annotation annotation : property.getAnnotations()) {
+			for (Annotation annotation : property.getImmutableAnnotations()) {
 				json.writeFieldName(edmProperty.getName() + "@" + annotation.getTerm());
 				writeInstanceAnnotation(json, annotation, "");
 			}

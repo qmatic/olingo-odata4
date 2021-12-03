@@ -177,7 +177,7 @@ public class AtomSerializer implements ODataSerializer {
 
     writer.writeEndElement();
 
-    for (Annotation annotation : property.getAnnotations()) {
+    for (Annotation annotation : property.getImmutableAnnotations()) {
       annotation(writer, annotation, property.getName());
     }
   }
@@ -342,7 +342,7 @@ public class AtomSerializer implements ODataSerializer {
 
     content.write(writer, link);
 
-    for (Annotation annotation : link.getAnnotations()) {
+    for (Annotation annotation : link.getImmutableAnnotations()) {
       annotation(writer, annotation, null);
     }
     writer.writeEndElement();    
@@ -466,7 +466,7 @@ public class AtomSerializer implements ODataSerializer {
     }
     writer.writeEndElement();
 
-    for (Annotation annotation : entity.getAnnotations()) {
+    for (Annotation annotation : entity.getImmutableAnnotations()) {
       annotation(writer, annotation, null);
     }
   }

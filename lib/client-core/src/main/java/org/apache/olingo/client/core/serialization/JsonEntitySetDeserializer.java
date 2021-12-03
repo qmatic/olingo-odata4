@@ -114,7 +114,7 @@ public class JsonEntitySetDeserializer extends JsonDeserializer {
         } catch (final EdmPrimitiveTypeException e) {
           throw new IOException(e);
         }
-        entitySet.getAnnotations().add(annotation);
+        entitySet.addAnnotation(annotation);
       } else if (field.getKey().charAt(0) == '#') {
         final Operation operation = new Operation();
         operation.setMetadataAnchor(field.getKey());

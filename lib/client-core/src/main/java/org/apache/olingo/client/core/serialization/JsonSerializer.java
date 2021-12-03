@@ -149,7 +149,7 @@ public class JsonSerializer implements ODataSerializer {
 
     final Map<String, List<String>> entitySetLinks = new HashMap<>();
     for (Link link : linked.getNavigationLinks()) {
-      for (Annotation annotation : link.getAnnotations()) {
+      for (Annotation annotation : link.getImmutableAnnotations()) {
         valuable(jgen, annotation, link.getTitle() + "@" + annotation.getTerm());
       }
 
@@ -216,7 +216,7 @@ public class JsonSerializer implements ODataSerializer {
     }
 
     for (Link link : linked.getNavigationLinks()) {
-      for (Annotation annotation : link.getAnnotations()) {
+      for (Annotation annotation : link.getImmutableAnnotations()) {
         valuable(jgen, annotation, link.getTitle() + "@" + annotation.getTerm());
       }
 
@@ -375,7 +375,7 @@ public class JsonSerializer implements ODataSerializer {
       }
     }
 
-    for (Annotation annotation : ((Annotatable) valuable).getAnnotations()) {
+    for (Annotation annotation : ((Annotatable) valuable).getImmutableAnnotations()) {
       valuable(jgen, annotation, name + "@" + annotation.getTerm());
     }
 

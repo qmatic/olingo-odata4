@@ -421,7 +421,7 @@ public class JsonDeltaSerializerWithNavigationsTest {
     Annotation annotation = new Annotation();
     annotation.setTerm("myannoation.deletedBy");
     annotation.setValue(ValueType.PRIMITIVE, "Mario");
-    entity1.getAnnotations().add(annotation );
+    entity1.addAnnotation(annotation);
     DeletedEntity entity2 = new DeletedEntity();
     entity2.setId(new URI("ESDelta(-32768)"));
     entity2.setReason(Reason.changed);    

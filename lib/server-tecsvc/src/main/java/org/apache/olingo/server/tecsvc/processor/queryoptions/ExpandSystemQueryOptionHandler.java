@@ -204,7 +204,7 @@ public class ExpandSystemQueryOptionHandler {
     Entity newEntity = new Entity();
 
     newEntity.getProperties().addAll(entity.getProperties());
-    newEntity.getAnnotations().addAll(entity.getAnnotations());
+    newEntity.addAllAnnotations(entity.getImmutableAnnotations());
     newEntity.setId(entity.getId());
     newEntity.setBaseURI(entity.getBaseURI());
     newEntity.setType(entity.getType());

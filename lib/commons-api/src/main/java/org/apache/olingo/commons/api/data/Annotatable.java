@@ -18,7 +18,10 @@
  */
 package org.apache.olingo.commons.api.data;
 
+import com.google.common.collect.ImmutableList;
+
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -26,14 +29,59 @@ import java.util.List;
  */
 public abstract class Annotatable {
 
-  private final List<Annotation> annotations = new ArrayList<>();
+  /*
+  Annotations are on many different types of objects so in large datasets
+  with few annotations any lists even if empty will consume a lot of
+  heap space. This class is optimized for scenarios with few or no annotations
+  because it will only initialize the annotation collections when needed.
+  This implementation only returns a readonly view of the annotations so that
+  modification can only be done by the instance function of this class.
+  The readonly list is not created on the fly since it is used heavily
+  in equals and hashcode code.
+  */
+
+  private final static List<Annotation> EMPTY_ANNOTATIONS = ImmutableList.of();
 
   /**
-   * Get Annotations.
-   *
-   * @return annotations
+   * A list of annotations that is initiated with an empty static list
    */
-  public List<Annotation> getAnnotations() {
-    return annotations;
+  private List<Annotation> annotations = EMPTY_ANNOTATIONS;
+
+  /**
+   * A list of readonly view of the annotations
+   */
+  private List<Annotation> immutableAnnotations = EMPTY_ANNOTATIONS;
+
+  public void addAnnotation(final Annotation annotation) {
+    synchronized (this) {
+      if (this.annotations == EMPTY_ANNOTATIONS) {
+        this.annotations = new ArrayList<>();
+      }
+      this.annotations.add(annotation);
+      this.immutableAnnotations = ImmutableList.copyOf(this.annotations);
+    }
+  }
+
+  public void addAllAnnotations(final Collection<Annotation> newAnnotations) {
+    synchronized (this) {
+      if (!newAnnotations.isEmpty()) {
+        if (annotations == EMPTY_ANNOTATIONS) {
+          this.annotations = new ArrayList<>();
+        }
+        annotations.addAll(newAnnotations);
+        this.immutableAnnotations = ImmutableList.copyOf(this.annotations);
+      }
+    }
+  }
+
+  /**
+   * Get an immutable view of all the Annotations.
+   *
+   * @return an immutable view of all the Annotations
+   */
+  public List<Annotation> getImmutableAnnotations() {
+    synchronized (this) {
+      return this.immutableAnnotations;
+    }
   }
 }

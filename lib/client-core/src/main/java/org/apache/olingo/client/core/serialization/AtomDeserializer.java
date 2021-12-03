@@ -442,7 +442,7 @@ public class AtomDeserializer implements ODataDeserializer {
             }
           }
         } else if (annotationQName.equals(event.asStartElement().getName())) {
-          link.getAnnotations().add(annotation(reader, event.asStartElement()));
+          link.addAnnotation(annotation(reader, event.asStartElement()));
         }
       }
 
@@ -593,7 +593,7 @@ public class AtomDeserializer implements ODataDeserializer {
 
     for (Property property : entity.getProperties()) {
       if (annotations.containsKey(property.getName())) {
-        property.getAnnotations().addAll(annotations.get(property.getName()));
+        property.addAllAnnotations(annotations.get(property.getName()));
       }
     }
   }
@@ -727,7 +727,7 @@ public class AtomDeserializer implements ODataDeserializer {
           } else if (propertiesQName.equals(event.asStartElement().getName())) {
             properties(reader, event.asStartElement(), entity);
           } else if (annotationQName.equals(event.asStartElement().getName())) {
-            entity.getAnnotations().add(annotation(reader, event.asStartElement()));
+            entity.addAnnotation(annotation(reader, event.asStartElement()));
           }
         }
 
@@ -821,7 +821,7 @@ public class AtomDeserializer implements ODataDeserializer {
         } else if (entryRefQName.equals(event.asStartElement().getName())) {
           entitySet.getEntities().add(entityRef(event.asStartElement()));
         } else if (annotationQName.equals(event.asStartElement().getName())) {
-          entitySet.getAnnotations().add(annotation(reader, event.asStartElement()));
+          entitySet.addAnnotation(annotation(reader, event.asStartElement()));
         }
       }
 

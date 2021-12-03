@@ -77,7 +77,7 @@ public class ODataJsonDeserializerWithInstanceAnnotationsTest extends AbstractOD
   		new ByteArrayInputStream(entityString.getBytes()), 
   		"ETAllPrim", ContentType.APPLICATION_JSON).getEntity();
     assertNotNull(entity);
-    List<Annotation> annotations = entity.getAnnotations();
+    List<Annotation> annotations = entity.getImmutableAnnotations();
     assertEquals(2, annotations.size());
     assertEquals("com.contoso.display.highlight", annotations.get(0).getTerm());
     assertTrue((Boolean)annotations.get(0).getValue());
@@ -140,7 +140,7 @@ public class ODataJsonDeserializerWithInstanceAnnotationsTest extends AbstractOD
     final Entity entity = deserialize(entityString, "ETAllPrim");
     assertNotNull(entity);
     Property property = entity.getProperties().get(1);
-    List<Annotation> annotations = property.getAnnotations();
+    List<Annotation> annotations = property.getImmutableAnnotations();
     assertEquals(1, annotations.size());
     assertEquals("com.contoso.display.style", annotations.get(0).getTerm());
     assertEquals(ValueType.COMPLEX, annotations.get(0).getValueType());
@@ -217,7 +217,7 @@ public class ODataJsonDeserializerWithInstanceAnnotationsTest extends AbstractOD
     final Entity entity = deserialize(entityString, "ETMixPrimCollComp");
     assertNotNull(entity);
     Property property = entity.getProperties().get(2);
-    List<Annotation> annotations = property.getAnnotations();
+    List<Annotation> annotations = property.getImmutableAnnotations();
     assertEquals(1, annotations.size());
     assertEquals("com.contoso.display.style", annotations.get(0).getTerm());
     assertEquals(ValueType.COMPLEX, annotations.get(0).getValueType());
@@ -249,7 +249,7 @@ public class ODataJsonDeserializerWithInstanceAnnotationsTest extends AbstractOD
 		assertNotNull(entity);
 		Property propertyStream = entity.getProperty("PropertyStream");
 		assertNotNull(propertyStream);
-		List<Annotation> annotations = propertyStream.getAnnotations();
+		List<Annotation> annotations = propertyStream.getImmutableAnnotations();
 		assertEquals(6, annotations.size());
 		for(Annotation annotation : annotations) {
 			if("odata.mediaReadLink".equals(annotation.getTerm())) {

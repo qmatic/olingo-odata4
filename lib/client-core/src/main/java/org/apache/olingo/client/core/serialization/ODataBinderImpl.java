@@ -190,7 +190,7 @@ public class ODataBinderImpl implements ODataBinder {
       annotation.setType(odataAnnotation.getValue().getTypeName());
       updateValuable(annotation, odataAnnotation);
 
-      annotatable.getAnnotations().add(annotation);
+      annotatable.addAnnotation(annotation);
     }
   }
 
@@ -367,7 +367,7 @@ public class ODataBinderImpl implements ODataBinder {
   }
 
   private void odataAnnotations(final Annotatable annotatable, final ClientAnnotatable odataAnnotatable) {
-    for (Annotation annotation : annotatable.getAnnotations()) {
+    for (Annotation annotation : annotatable.getImmutableAnnotations()) {
       FullQualifiedName fqn = null;
       if (client instanceof EdmEnabledODataClient) {
         final EdmTerm term = ((EdmEnabledODataClient) client).getCachedEdm().
@@ -611,7 +611,7 @@ public class ODataBinderImpl implements ODataBinder {
   }
   
   private void copyAnnotations(Entity inlineEntity, ComplexValue complex) {
-    for (Annotation annotation:complex.getAnnotations()) {
+    for (Annotation annotation:complex.getImmutableAnnotations()) {
       if (annotation.getTerm().equals(Constants.JSON_TYPE.substring(1))){
         inlineEntity.setType((String)annotation.asPrimitive());
       } else if (annotation.getTerm().equals(Constants.JSON_ID.substring(1))){
