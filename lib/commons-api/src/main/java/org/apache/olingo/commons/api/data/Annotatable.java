@@ -19,7 +19,6 @@
 package org.apache.olingo.commons.api.data;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 /**
@@ -46,12 +45,8 @@ public abstract class Annotatable {
       return;
     }
 
-    if (this.annotations == NO_ANNOTATIONS) {
-      this.annotations = new ArrayList<>();
-    }
-
     for (Annotation annotation : annotations) {
-      this.annotations.add(annotation);
+      this.addAnnotation(annotation);
     }
   }
 
@@ -74,6 +69,10 @@ public abstract class Annotatable {
 
   public List<Annotation> getAnnotationsListClone() {
     return new ArrayList<>(this.annotations);
+  }
+
+  public int sizeOfAnnotations() {
+    return this.annotations.size();
   }
 
 }
