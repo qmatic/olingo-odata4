@@ -121,14 +121,14 @@ public class PropertyResponse extends ServiceResponse {
       EdmAction action = this.metadata.getEdm().getBoundActionWithBindingType(
           edmType.getFullQualifiedName(), this.collection);
       if (action != null) {
-        property.getOperations().add(buildOperation(action, buildOperationTarget(contextURL)));
+        property.addOperation(buildOperation(action, buildOperationTarget(contextURL)));
       }
       
       List<EdmFunction> functions = this.metadata.getEdm()
           .getBoundFunctionsWithBindingType(edmType.getFullQualifiedName(), this.collection);
       
       for (EdmFunction function:functions) {
-        property.getOperations().add(buildOperation(function, buildOperationTarget(contextURL)));
+        property.addOperation(buildOperation(function, buildOperationTarget(contextURL)));
       }
     }    
 

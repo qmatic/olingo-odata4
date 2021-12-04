@@ -27,7 +27,9 @@ import java.util.List;
 public class Property extends Valuable {
 
   private String name;
-  private final List<Operation> operations = new ArrayList<Operation>();
+
+  private static final List<Operation> EMPTY_OPERATIONS = new ArrayList<Operation>();
+  private List<Operation> operations = EMPTY_OPERATIONS;
   
   /**
    * Creates a new property
@@ -83,14 +85,22 @@ public class Property extends Valuable {
   public boolean isNull() {
     return getValue() == null || "Edm.Null".equals(getType());
   }
-  
+
+
+  public void addOperation(final Operation operation) {
+    if (operations == EMPTY_OPERATIONS) {
+      this.operations = new ArrayList<Operation>();
+    }
+    operations.add(operation);
+  }
+
   /**
    * Gets operations.
    *
    * @return operations.
    */
-  public List<Operation> getOperations() {
-    return operations;
+  public Iterable<Operation> getOperationsIterable() {
+    return this.operations;
   }  
 
   @Override

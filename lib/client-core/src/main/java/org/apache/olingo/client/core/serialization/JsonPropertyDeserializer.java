@@ -117,7 +117,7 @@ public class JsonPropertyDeserializer extends JsonDeserializer {
         final ObjectNode opNode = (ObjectNode) tree.get(field.getKey());
         operation.setTitle(opNode.get(Constants.ATTR_TITLE).asText());
         operation.setTarget(URI.create(opNode.get(Constants.ATTR_TARGET).asText()));
-        property.getOperations().add(operation);
+        property.addOperation(operation);
         toRemove.add(field.getKey());
       }
     }

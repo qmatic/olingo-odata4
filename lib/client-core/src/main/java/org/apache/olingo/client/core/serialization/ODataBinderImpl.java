@@ -758,7 +758,7 @@ public class ODataBinderImpl implements ODataBinder {
             payload, resource.getContextURL(), resource.getMetadataETag()));
     odataAnnotations(payload, property);
     
-    for (Operation op : resource.getPayload().getOperations()) {
+    for (Operation op : resource.getPayload().getOperationsIterable()) {
       ClientOperation operation = new ClientOperation();
       operation.setTarget(op.getTarget());
       operation.setTitle(op.getTitle());

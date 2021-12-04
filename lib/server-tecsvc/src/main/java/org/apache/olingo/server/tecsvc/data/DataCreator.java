@@ -2127,10 +2127,10 @@ public class DataCreator {
         for (CsdlFunction func : functions) {
           if (func.getParameters().get(0).isCollection() && property.isCollection()) {
             Operation operation = buildOperation(func, name);
-            property.getOperations().add(operation);          
+            property.addOperation(operation);
           } else {
             Operation operation = buildOperation(func, name);
-            property.getOperations().add(operation);
+            property.addOperation(operation);
           }
         }        
       } catch (ODataException e) {

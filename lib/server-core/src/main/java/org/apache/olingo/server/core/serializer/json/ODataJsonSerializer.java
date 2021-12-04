@@ -447,7 +447,7 @@ public class ODataJsonSerializer extends AbstractODataSerializer {
     }
   }
 
-  private void writeOperations(final List<Operation> operations, final JsonGenerator json)
+  private void writeOperations(final Iterable<Operation> operations, final JsonGenerator json)
       throws IOException {
     if (isODataMetadataFull) {
       for (Operation operation : operations) {
@@ -1116,7 +1116,7 @@ public class ODataJsonSerializer extends AbstractODataSerializer {
       json.writeStartObject();
       writeContextURL(contextURL, json);
       writeMetadataETag(metadata, json);
-      writeOperations(property.getOperations(), json);
+      writeOperations(property.getOperationsIterable(), json);
       if (property.isNull() && options!=null && options.isNullable() != null && !options.isNullable()) {
         throw new SerializerException("Property value can not be null.", SerializerException.MessageKeys.NULL_INPUT);
       } else {
@@ -1179,7 +1179,7 @@ public class ODataJsonSerializer extends AbstractODataSerializer {
         json.writeStringField(constants.getType(), "#" + 
       resolvedType.getFullQualifiedName().getFullQualifiedNameAsString());
       }
-      writeOperations(property.getOperations(), json);      
+      writeOperations(property.getOperationsIterable(), json);
       final List<Property> values =
           property.isNull() ? Collections.<Property> emptyList() : property.asComplex().getValue();
       writeProperties(metadata, type, values, options == null ? null : options == null ? null : options.getSelect(), 
@@ -1219,7 +1219,7 @@ public class ODataJsonSerializer extends AbstractODataSerializer {
       if (isODataMetadataFull) {
         json.writeStringField(constants.getType(),  "#Collection("+type.getFullQualifiedName().getName()+")");
       }
-      writeOperations(property.getOperations(), json);
+      writeOperations(property.getOperationsIterable(), json);
       json.writeFieldName(Constants.VALUE);
       writePrimitiveCollection(type, property,
           options == null ? null : options.isNullable(),
@@ -1258,7 +1258,7 @@ public class ODataJsonSerializer extends AbstractODataSerializer {
         json.writeStringField(constants.getType(), 
             "#Collection(" + type.getFullQualifiedName().getFullQualifiedNameAsString() + ")");                
       }
-      writeOperations(property.getOperations(), json);
+      writeOperations(property.getOperationsIterable(), json);
       json.writeFieldName(Constants.VALUE);
       Set<List<String>> selectedPaths = null;
       if (null != options && null != options.getSelect()) {
