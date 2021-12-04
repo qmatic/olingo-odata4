@@ -43,7 +43,9 @@ public class Property extends Valuable {
    * @param name  Name of the property
    */
   public Property(final String type, final String name) {
-    this.name = name;
+    if (name != null) {
+      this.name = name.intern();
+    }
     super.setType(type);
   }
   

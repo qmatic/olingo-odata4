@@ -52,7 +52,11 @@ public abstract class Valuable extends Annotatable {
    * @param type string representation of type
    */
   public void setType(final String type) {
-    this.type = type;
+    if (type != null) {
+      this.type = type.intern();
+    } else {
+      this.type = null;
+    }
   }
 
   /**

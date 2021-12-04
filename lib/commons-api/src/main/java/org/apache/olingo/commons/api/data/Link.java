@@ -51,7 +51,11 @@ public class Link extends Annotatable {
    * @param title title.
    */
   public void setTitle(final String title) {
-    this.title = title;
+    if (title != null)  {
+      this.title = title.intern();
+    } else {
+      this.title = null;
+    }
   }
 
   /**
@@ -69,7 +73,11 @@ public class Link extends Annotatable {
    * @param rel rel info.
    */
   public void setRel(final String rel) {
-    this.rel = rel;
+    if (rel != null)  {
+      this.rel = rel.intern();
+    } else {
+      this.rel = null;
+    }
   }
 
   /**
