@@ -22,12 +22,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * An element with instance annotations.
+ * An element with instance annotations. This class lazy loads its internal
+ * collection to preserve heap space. Annotations are on may objects and
+ * when you have large datasets empty collections of annotations consume
+ * a lot of heap space. This class also hides the internal collection
+ * implementation from the outside so that its possible to optimize
+ * further without having to change the API. It is possible to add
+ * annotations as a single one or an iterable. When adding annotations
+ * the hashcode is computed so that the hashcode function used by
+ * subclasses won't need to iterate through each annotation every
+ * time they calculate the hashcode.
  */
 public abstract class Annotatable {
 
   private static final List<Annotation> NO_ANNOTATIONS = new ArrayList<>();
   private List<Annotation> annotations = NO_ANNOTATIONS;
+  private int annotationsHashCodeCache = this.annotations.hashCode();
 
   public void addAnnotation(final Annotation annotation) {
     if (annotation == null) {
@@ -37,6 +47,7 @@ public abstract class Annotatable {
       this.annotations = new ArrayList<>();
     }
     annotations.add(annotation);
+    this.annotationsHashCodeCache = this.annotations.hashCode();
   }
 
   public void addAnnotations(final Iterable<Annotation> annotations) {
@@ -60,15 +71,11 @@ public abstract class Annotatable {
   }
 
   public int getAnnotationsHashCode() {
-    return this.annotations.hashCode();
+    return this.annotationsHashCodeCache;
   }
 
   public Iterable<Annotation> getAnnotationsIterable() {
     return this.annotations;
-  }
-
-  public List<Annotation> getAnnotationsListClone() {
-    return new ArrayList<>(this.annotations);
   }
 
   public int sizeOfAnnotations() {

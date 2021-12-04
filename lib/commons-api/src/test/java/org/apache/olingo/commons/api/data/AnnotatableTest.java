@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNotEquals;
 
 public class AnnotatableTest {
 
@@ -65,19 +65,16 @@ public class AnnotatableTest {
     }
 
     @Test
-    public void getListClone() {
-        List<Annotation> annotations = new ArrayList<Annotation>();
-        annotations.add(createAnnotation("a", "b"));
-        annotations.add(createAnnotation("b", "c"));
-        annotations.add(createAnnotation("d", "e"));
-
+    public void testAnnotationsHashCode() {
         AnnotatableTestClass test = new AnnotatableTestClass();
-        test.addAnnotations(annotations);
-        assertEquals(3, test.sizeOfAnnotations());
-        assertEquals(3, countAnnotations(test));
-
-        List<Annotation> clone = test.getAnnotationsListClone();
-        assertNotNull(clone);
-        assertEquals(annotations.size(), clone.size());
+        int hash = test.getAnnotationsHashCode();
+        test.addAnnotation(createAnnotation("a", "b"));
+        int hash2 = test.getAnnotationsHashCode();
+        assertNotEquals(hash, hash2);
+        test.addAnnotation(createAnnotation("b", "c"));
+        int hash3 = test.getAnnotationsHashCode();
+        assertNotEquals(hash2, hash3);
+        assertEquals(2, test.sizeOfAnnotations());
+        assertEquals(2, countAnnotations(test));
     }
 }

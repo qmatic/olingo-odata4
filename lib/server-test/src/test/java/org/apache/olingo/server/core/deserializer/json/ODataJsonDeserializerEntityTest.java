@@ -66,6 +66,8 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.mockito.Mockito;
 
+import static org.apache.olingo.server.core.deserializer.json.AnnotationTestUtil.createAnnotationsList;
+
 public class ODataJsonDeserializerEntityTest extends AbstractODataDeserializerTest {
 
   private static final ContentType CONTENT_TYPE_JSON_IEEE754Compatible =
@@ -1272,7 +1274,7 @@ public class ODataJsonDeserializerEntityTest extends AbstractODataDeserializerTe
         + "{\"PropertyInt16\":789,\"PropertyString\":\"TEST 3\"}]}";
     Entity entity = deserialize(entityString, "ETMixPrimCollComp", ContentType.APPLICATION_JSON);
     assertNotNull(entity);
-    List<Annotation> annotations = entity.getProperty("CollPropertyString").getAnnotationsListClone();
+    List<Annotation> annotations = createAnnotationsList(entity.getProperty("CollPropertyString"));
     assertEquals(1, annotations.size());
     assertEquals("custom.annotation", annotations.get(0).getTerm());
     assertEquals(12, annotations.get(0).getValue());

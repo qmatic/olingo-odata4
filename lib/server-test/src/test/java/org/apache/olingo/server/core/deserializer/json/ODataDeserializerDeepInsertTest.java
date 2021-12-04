@@ -37,6 +37,8 @@ import org.apache.olingo.server.api.uri.queryoption.ExpandItem;
 import org.apache.olingo.server.api.uri.queryoption.ExpandOption;
 import org.apache.olingo.server.core.deserializer.AbstractODataDeserializerTest;
 import org.junit.Test;
+import static org.apache.olingo.server.core.deserializer.json.AnnotationTestUtil.createAnnotationsList;
+
 
 public class ODataDeserializerDeepInsertTest extends AbstractODataDeserializerTest {
 
@@ -130,7 +132,7 @@ public class ODataDeserializerDeepInsertTest extends AbstractODataDeserializerTe
   public void esAllPrimExpandedToOneWithCustomAnnotations() throws Exception {
       Entity entity = deserialize("EntityESAllPrimExpandedNavPropertyETTwoPrimOneWithCustomAnnotations.json");
       assertNotNull(entity);
-	  List<Annotation> annotations = entity.getNavigationLink("NavPropertyETTwoPrimOne").getAnnotationsListClone();
+	  List<Annotation> annotations = createAnnotationsList(entity.getNavigationLink("NavPropertyETTwoPrimOne"));
 	  assertEquals(1, annotations.size());
 	  assertEquals("custom.annotation", annotations.get(0).getTerm());
 	  assertEquals("customValue", annotations.get(0).getValue());
@@ -141,7 +143,7 @@ public class ODataDeserializerDeepInsertTest extends AbstractODataDeserializerTe
   public void esAllPrimExpandedToManyWithCustomAnnotations() throws Exception {
 	  Entity entity = deserialize("EntityESAllPrimExpandedNavPropertyETTwoPrimManyWithCustomAnnotations.json");
 	  assertNotNull(entity);
-	  List<Annotation> annotations = entity.getNavigationLink("NavPropertyETTwoPrimMany").getAnnotationsListClone();
+	  List<Annotation> annotations = createAnnotationsList(entity.getNavigationLink("NavPropertyETTwoPrimMany"));
 	  assertEquals(1, annotations.size());
 	  assertEquals("custom.annotation", annotations.get(0).getTerm());
 	  assertEquals("customValue", annotations.get(0).getValue());

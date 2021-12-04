@@ -27,11 +27,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.olingo.commons.api.data.Annotation;
-import org.apache.olingo.commons.api.data.ComplexValue;
-import org.apache.olingo.commons.api.data.Entity;
-import org.apache.olingo.commons.api.data.Property;
-import org.apache.olingo.commons.api.data.ValueType;
+import org.apache.olingo.commons.api.data.*;
 import org.apache.olingo.commons.api.edm.EdmEntityType;
 import org.apache.olingo.commons.api.edm.FullQualifiedName;
 import org.apache.olingo.commons.api.format.ContentType;
@@ -40,6 +36,8 @@ import org.apache.olingo.server.api.deserializer.DeserializerException;
 import org.apache.olingo.server.api.deserializer.DeserializerResult;
 import org.apache.olingo.server.core.deserializer.AbstractODataDeserializerTest;
 import org.junit.Test;
+
+import static org.apache.olingo.server.core.deserializer.json.AnnotationTestUtil.createAnnotationsList;
 
 public class ODataJsonDeserializerWithInstanceAnnotationsTest extends AbstractODataDeserializerTest {
 
@@ -77,7 +75,7 @@ public class ODataJsonDeserializerWithInstanceAnnotationsTest extends AbstractOD
   		new ByteArrayInputStream(entityString.getBytes()), 
   		"ETAllPrim", ContentType.APPLICATION_JSON).getEntity();
     assertNotNull(entity);
-    List<Annotation> annotations = entity.getAnnotationsListClone();
+    List<Annotation> annotations = createAnnotationsList(entity);
     assertEquals(2, annotations.size());
     assertEquals("com.contoso.display.highlight", annotations.get(0).getTerm());
     assertTrue((Boolean)annotations.get(0).getValue());
@@ -140,7 +138,7 @@ public class ODataJsonDeserializerWithInstanceAnnotationsTest extends AbstractOD
     final Entity entity = deserialize(entityString, "ETAllPrim");
     assertNotNull(entity);
     Property property = entity.getProperties().get(1);
-    List<Annotation> annotations = property.getAnnotationsListClone();
+    List<Annotation> annotations = createAnnotationsList(property);
     assertEquals(1, annotations.size());
     assertEquals("com.contoso.display.style", annotations.get(0).getTerm());
     assertEquals(ValueType.COMPLEX, annotations.get(0).getValueType());
@@ -217,7 +215,7 @@ public class ODataJsonDeserializerWithInstanceAnnotationsTest extends AbstractOD
     final Entity entity = deserialize(entityString, "ETMixPrimCollComp");
     assertNotNull(entity);
     Property property = entity.getProperties().get(2);
-    List<Annotation> annotations = property.getAnnotationsListClone();
+    List<Annotation> annotations = createAnnotationsList(property);
     assertEquals(1, annotations.size());
     assertEquals("com.contoso.display.style", annotations.get(0).getTerm());
     assertEquals(ValueType.COMPLEX, annotations.get(0).getValueType());
@@ -249,7 +247,7 @@ public class ODataJsonDeserializerWithInstanceAnnotationsTest extends AbstractOD
 		assertNotNull(entity);
 		Property propertyStream = entity.getProperty("PropertyStream");
 		assertNotNull(propertyStream);
-		List<Annotation> annotations = propertyStream.getAnnotationsListClone();
+		List<Annotation> annotations = createAnnotationsList(propertyStream);
 		assertEquals(6, annotations.size());
 		for(Annotation annotation : annotations) {
 			if("odata.mediaReadLink".equals(annotation.getTerm())) {
