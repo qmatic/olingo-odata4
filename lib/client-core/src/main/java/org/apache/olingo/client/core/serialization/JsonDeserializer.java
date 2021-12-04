@@ -252,7 +252,7 @@ public class JsonDeserializer implements ODataDeserializer {
 
         value(entityAnnot, field.getValue(), codec);
         if (annotatable != null) {
-          annotatable.getAnnotations().add(entityAnnot);
+          annotatable.addAnnotation(entityAnnot);
         }
       } else if (type == null && field.getKey().endsWith(getJSONAnnotation(Constants.JSON_TYPE))) {
         type = field.getValue().asText();
@@ -277,7 +277,7 @@ public class JsonDeserializer implements ODataDeserializer {
         properties.add(property);
 
         if (annotation != null) {
-          property.getAnnotations().add(annotation);
+          property.addAnnotation(annotation);
           annotation = null;
         }
       }

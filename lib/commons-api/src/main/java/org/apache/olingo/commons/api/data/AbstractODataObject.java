@@ -92,7 +92,7 @@ public abstract class AbstractODataObject extends Annotatable {
     }
 
     final AbstractODataObject other = (AbstractODataObject) o;
-    return getAnnotations().equals(other.getAnnotations())
+    return annotationsEquals(o)
         && (baseURI == null ? other.baseURI == null : baseURI.equals(other.baseURI))
         && (id == null ? other.id == null : id.equals(other.id))
         && (title == null ? other.title == null : title.equals(other.title));
@@ -100,7 +100,7 @@ public abstract class AbstractODataObject extends Annotatable {
 
   @Override
   public int hashCode() {
-    int result = getAnnotations().hashCode();
+    int result = getAnnotationsHashCode();
     result = 31 * result + (baseURI == null ? 0 : baseURI.hashCode());
     result = 31 * result + (id == null ? 0 : id.hashCode());
     result = 31 * result + (title == null ? 0 : title.hashCode());

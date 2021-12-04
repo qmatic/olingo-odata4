@@ -1343,7 +1343,7 @@ public class Services {
       if (navProperties.containsKey(property.getName())) {
         Link alink = new Link();
         alink.setTitle(property.getName());
-        alink.getAnnotations().addAll(property.getAnnotations());
+        alink.addAnnotations(property.getAnnotationsIterable());
 
         alink.setType(navProperties.get(property.getName()).isEntitySet()
             ? Constants.get(ConstantKey.ATOM_LINK_FEED)

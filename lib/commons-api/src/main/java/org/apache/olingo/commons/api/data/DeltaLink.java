@@ -87,7 +87,7 @@ public class DeltaLink extends Annotatable {
     }
 
     final DeltaLink other = (DeltaLink) o;
-    return getAnnotations().equals(other.getAnnotations())
+    return annotationsEquals(o)
         && (source == null ? other.source == null : source.equals(other.source))
         && (relationship == null ? other.relationship == null : relationship.equals(other.relationship))
         && (target == null ? other.target == null : target.equals(other.target));
@@ -95,7 +95,7 @@ public class DeltaLink extends Annotatable {
 
   @Override
   public int hashCode() {
-    int result = getAnnotations().hashCode();
+    int result = getAnnotationsHashCode();
     result = 31 * result + (source == null ? 0 : source.hashCode());
     result = 31 * result + (relationship == null ? 0 : relationship.hashCode());
     result = 31 * result + (target == null ? 0 : target.hashCode());

@@ -130,7 +130,7 @@ public class ODataDeserializerDeepInsertTest extends AbstractODataDeserializerTe
   public void esAllPrimExpandedToOneWithCustomAnnotations() throws Exception {
       Entity entity = deserialize("EntityESAllPrimExpandedNavPropertyETTwoPrimOneWithCustomAnnotations.json");
       assertNotNull(entity);
-	  List<Annotation> annotations = entity.getNavigationLink("NavPropertyETTwoPrimOne").getAnnotations();
+	  List<Annotation> annotations = entity.getNavigationLink("NavPropertyETTwoPrimOne").getAnnotationsListClone();
 	  assertEquals(1, annotations.size());
 	  assertEquals("custom.annotation", annotations.get(0).getTerm());
 	  assertEquals("customValue", annotations.get(0).getValue());
@@ -141,7 +141,7 @@ public class ODataDeserializerDeepInsertTest extends AbstractODataDeserializerTe
   public void esAllPrimExpandedToManyWithCustomAnnotations() throws Exception {
 	  Entity entity = deserialize("EntityESAllPrimExpandedNavPropertyETTwoPrimManyWithCustomAnnotations.json");
 	  assertNotNull(entity);
-	  List<Annotation> annotations = entity.getNavigationLink("NavPropertyETTwoPrimMany").getAnnotations();
+	  List<Annotation> annotations = entity.getNavigationLink("NavPropertyETTwoPrimMany").getAnnotationsListClone();
 	  assertEquals(1, annotations.size());
 	  assertEquals("custom.annotation", annotations.get(0).getTerm());
 	  assertEquals("customValue", annotations.get(0).getValue());

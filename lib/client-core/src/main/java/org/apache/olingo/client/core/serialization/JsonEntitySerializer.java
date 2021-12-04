@@ -77,7 +77,7 @@ public class JsonEntitySerializer extends JsonSerializer {
       jgen.writeStringField(Constants.JSON_ID, entity.getId().toASCIIString());
     }
 
-    for (Annotation annotation : entity.getAnnotations()) {
+    for (Annotation annotation : entity.getAnnotationsIterable()) {
       valuable(jgen, annotation, "@" + annotation.getTerm());
     }
 

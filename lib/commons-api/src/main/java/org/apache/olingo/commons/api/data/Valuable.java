@@ -182,7 +182,7 @@ public abstract class Valuable extends Annotatable {
     }
 
     final Valuable other = (Valuable) o;
-    return getAnnotations().equals(other.getAnnotations())
+    return annotationsEquals(o)
         && (valueType == null ? other.valueType == null : valueType.equals(other.valueType))
         && (value == null ? other.value == null : value.equals(other.value))
         && (type == null ? other.type == null : type.equals(other.type));
@@ -190,7 +190,7 @@ public abstract class Valuable extends Annotatable {
 
   @Override
   public int hashCode() {
-    int result = getAnnotations().hashCode();
+    int result = getAnnotationsHashCode();
     result = 31 * result + (valueType == null ? 0 : valueType.hashCode());
     result = 31 * result + (value == null ? 0 : value.hashCode());
     result = 31 * result + (type == null ? 0 : type.hashCode());

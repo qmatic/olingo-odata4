@@ -68,12 +68,12 @@ public class ODataJsonSerializerWithInstanceAnnotationsTest {
     annotation.setTerm("com.contoso.display.highlight");
     annotation.setType("Boolean");
     annotation.setValue(ValueType.PRIMITIVE, true);
-    entity.getAnnotations().add(annotation);
+    entity.addAnnotation(annotation);
     annotation = new Annotation();
     annotation.setTerm("com.contoso.PersonalInfo.PhoneNumbers");
     annotation.setType("String");
     annotation.setValue(ValueType.COLLECTION_PRIMITIVE, Arrays.asList("(203)555-1718", "(203)555-1719"));
-    entity.getAnnotations().add(annotation);
+    entity.addAnnotation(annotation);
     InputStream result = serializer.entity(metadata, edmEntitySet.getEntityType(), entity,
         EntitySerializerOptions.with()
             .contextURL(ContextURL.with().entitySet(edmEntitySet).suffix(Suffix.ENTITY).build())
@@ -121,7 +121,7 @@ public class ODataJsonSerializerWithInstanceAnnotationsTest {
     annotation.setValue(ValueType.COMPLEX, complexValue);
     
     Property property = entity.getProperty("PropertyString");
-    property.getAnnotations().add(annotation);
+    property.addAnnotation(annotation);
     
     InputStream result = serializerFullMetadata.entity(metadata, edmEntitySet.getEntityType(), entity,
         EntitySerializerOptions.with()
@@ -210,7 +210,7 @@ public class ODataJsonSerializerWithInstanceAnnotationsTest {
     annotation.setValue(ValueType.COMPLEX, complexValue);
     
     Property property = entity.getProperty("PropertyComp");
-    property.getAnnotations().add(annotation);
+    property.addAnnotation(annotation);
     
     InputStream result = serializerFullMetadata.entity(metadata, edmEntitySet.getEntityType(), entity,
         EntitySerializerOptions.with()

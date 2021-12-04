@@ -434,7 +434,7 @@ public class ODataJsonSerializer extends AbstractODataSerializer {
             json.writeStringField(constants.getEditLink(), entity.getEditLink().getHref());
           }
         }
-        instanceAnnotSerializer.writeInstanceAnnotationsOnEntity(entity.getAnnotations(), json);        
+        instanceAnnotSerializer.writeInstanceAnnotationsOnEntity(entity.getAnnotationsIterable(), json);
         writeProperties(metadata, resolvedType, entity.getProperties(), select, json, entity, expand);
         writeNavigationProperties(metadata, resolvedType, entity, expand, toDepth, ancestors, name, json);
         writeOperations(entity.getOperations(), json);      

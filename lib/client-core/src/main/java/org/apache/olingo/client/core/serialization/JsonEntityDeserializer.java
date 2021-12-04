@@ -213,7 +213,7 @@ public class JsonEntityDeserializer extends JsonDeserializer {
 
     for (Link link : entity.getNavigationLinks()) {
       if (annotations.containsKey(link.getTitle())) {
-        link.getAnnotations().addAll(annotations.get(link.getTitle()));
+        link.addAnnotations(annotations.get(link.getTitle()));
         for (Annotation annotation : annotations.get(link.getTitle())) {
           toRemove.add(link.getTitle() + "@" + annotation.getTerm());
         }
@@ -221,7 +221,7 @@ public class JsonEntityDeserializer extends JsonDeserializer {
     }
     for (Link link : entity.getMediaEditLinks()) {
       if (annotations.containsKey(link.getTitle())) {
-        link.getAnnotations().addAll(annotations.get(link.getTitle()));
+        link.addAnnotations(annotations.get(link.getTitle()));
         for (Annotation annotation : annotations.get(link.getTitle())) {
           toRemove.add(link.getTitle() + "@" + annotation.getTerm());
         }

@@ -62,7 +62,7 @@ public class ODataJsonInstanceAnnotationSerializer {
 	 * @throws SerializerException
 	 * @throws DecoderException
 	 */
-	public void writeInstanceAnnotationsOnEntity(final List<Annotation> annotations, final JsonGenerator json)
+	public void writeInstanceAnnotationsOnEntity(final Iterable<Annotation> annotations, final JsonGenerator json)
 			throws IOException, SerializerException, DecoderException {
 		for (Annotation annotation : annotations) {
 			if (isODataMetadataFull) {
@@ -85,7 +85,7 @@ public class ODataJsonInstanceAnnotationSerializer {
 	public void writeInstanceAnnotationsOnProperties(final EdmProperty edmProperty, final Property property,
 			final JsonGenerator json) throws IOException, SerializerException, DecoderException {
 		if (property != null) {
-			for (Annotation annotation : property.getAnnotations()) {
+			for (Annotation annotation : property.getAnnotationsIterable()) {
 				json.writeFieldName(edmProperty.getName() + "@" + annotation.getTerm());
 				writeInstanceAnnotation(json, annotation, "");
 			}

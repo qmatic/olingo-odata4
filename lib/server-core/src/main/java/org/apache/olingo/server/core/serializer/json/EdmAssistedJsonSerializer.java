@@ -155,7 +155,7 @@ public class EdmAssistedJsonSerializer implements EdmAssistedSerializer {
       json.writeStringField(constants.getDeltaLink(), entityCollection.getDeltaLink().toASCIIString());
     }
 
-    for (final Annotation annotation : entityCollection.getAnnotations()) {
+    for (final Annotation annotation : entityCollection.getAnnotationsIterable()) {
       valuable(json, annotation, '@' + annotation.getTerm(), null, null);
     }
 
@@ -182,7 +182,7 @@ public class EdmAssistedJsonSerializer implements EdmAssistedSerializer {
         .getType()).build().external();
     metadata(contextURLString, metadataETag, entity.getETag(), typeName, entity.getId(), true, json);
 
-    for (final Annotation annotation : entity.getAnnotations()) {
+    for (final Annotation annotation : entity.getAnnotationsIterable()) {
       valuable(json, annotation, '@' + annotation.getTerm(), null, null);
     }
 
@@ -240,7 +240,7 @@ public class EdmAssistedJsonSerializer implements EdmAssistedSerializer {
 
     for (final Link link : linked.getNavigationLinks()) {
       final String name = link.getTitle();
-      for (final Annotation annotation : link.getAnnotations()) {
+      for (final Annotation annotation : link.getAnnotationsIterable()) {
         valuable(json, annotation, name + '@' + annotation.getTerm(), null, null);
       }
 
@@ -408,7 +408,7 @@ public class EdmAssistedJsonSerializer implements EdmAssistedSerializer {
       }
     }
 
-    for (final Annotation annotation : ((Annotatable) valuable).getAnnotations()) {
+    for (final Annotation annotation : ((Annotatable) valuable).getAnnotationsIterable()) {
       valuable(json, annotation, name + '@' + annotation.getTerm(), null, null);
     }
 

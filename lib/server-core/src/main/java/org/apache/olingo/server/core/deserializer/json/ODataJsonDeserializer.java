@@ -475,13 +475,13 @@ public class ODataJsonDeserializer implements ODataDeserializer {
     	  // propertyName@Term
     	  if (!keySplit[0].isEmpty()) {
     		  if (edmEntityType.getPropertyNames().contains(keySplit[0])) {
-    			  entity.getProperty(keySplit[0]).getAnnotations().add(annotation);
+    			  entity.getProperty(keySplit[0]).addAnnotation(annotation);
     		  } else if (edmEntityType.getNavigationPropertyNames().contains(keySplit[0])) {
     			  Link link = entity.getNavigationLink(keySplit[0]);
-    			  link.getAnnotations().add(annotation);
+    			  link.addAnnotation(annotation);
     		  }
     	  } else {
-    		  entity.getAnnotations().add(annotation);
+    		  entity.addAnnotation(annotation);
     	  }
     	  toRemove.add(field.getKey());
       } else if (isStreamPropertyNode(field.getKey())) {
@@ -539,7 +539,7 @@ public class ODataJsonDeserializer implements ODataDeserializer {
       property.setName(propertyName);
       entity.addProperty(property);
     }
-    property.getAnnotations().add(annotation);
+    property.addAnnotation(annotation);
   }
 
   private void consumeEntityProperties(final EdmEntityType edmEntityType, final ObjectNode node,

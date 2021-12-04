@@ -78,7 +78,7 @@ public class JsonEntitySetSerializer extends JsonSerializer {
       }
     }
 
-    for (Annotation annotation : entitySet.getAnnotations()) {
+    for (Annotation annotation : entitySet.getAnnotationsIterable()) {
       valuable(jgen, annotation, "@" + annotation.getTerm());
     }
 

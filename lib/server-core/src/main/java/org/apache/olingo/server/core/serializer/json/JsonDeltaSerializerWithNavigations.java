@@ -213,12 +213,12 @@ public class JsonDeltaSerializerWithNavigations implements EdmDeltaSerializer {
     json.writeStartObject();
     json.writeStringField(Constants.ELEM_REASON,
         ((DeletedEntity) deletedEntity).getReason().name());
-    List<Annotation> annotations = deletedEntity.getAnnotations();
-    if (annotations != null && !annotations.isEmpty()) {
-      for (Annotation annotation : annotations) {
-        json.writeStringField(Constants.AT + annotation.getTerm(), annotation.getValue().toString());
-      }
+    Iterable<Annotation> annotations = deletedEntity.getAnnotationsIterable();
+
+    for (Annotation annotation : annotations) {
+      json.writeStringField(Constants.AT + annotation.getTerm(), annotation.getValue().toString());
     }
+
     json.writeEndObject();
     List<Property> properties = deletedEntity.getProperties();
     if (properties != null && !properties.isEmpty()) {

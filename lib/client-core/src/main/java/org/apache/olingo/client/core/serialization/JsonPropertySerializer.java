@@ -62,7 +62,7 @@ public class JsonPropertySerializer extends JsonSerializer {
           new EdmTypeInfo.Builder().setTypeExpression(property.getType()).build().external());
     }
 
-    for (Annotation annotation : property.getAnnotations()) {
+    for (Annotation annotation : property.getAnnotationsIterable()) {
       valuable(jgen, annotation, "@" + annotation.getTerm());
     }
 

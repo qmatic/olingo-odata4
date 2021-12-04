@@ -19,6 +19,7 @@
 package org.apache.olingo.commons.api.data;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -26,14 +27,53 @@ import java.util.List;
  */
 public abstract class Annotatable {
 
-  private final List<Annotation> annotations = new ArrayList<>();
+  private static final List<Annotation> NO_ANNOTATIONS = new ArrayList<>();
+  private List<Annotation> annotations = NO_ANNOTATIONS;
 
-  /**
-   * Get Annotations.
-   *
-   * @return annotations
-   */
-  public List<Annotation> getAnnotations() {
-    return annotations;
+  public void addAnnotation(final Annotation annotation) {
+    if (annotation == null) {
+      return;
+    }
+    if (annotations == NO_ANNOTATIONS) {
+      this.annotations = new ArrayList<>();
+    }
+    annotations.add(annotation);
   }
+
+  public void addAnnotations(final Iterable<Annotation> annotations) {
+
+    if (annotations == null) {
+      return;
+    }
+
+    if (this.annotations == NO_ANNOTATIONS) {
+      this.annotations = new ArrayList<>();
+    }
+
+    for (Annotation annotation : annotations) {
+      this.annotations.add(annotation);
+    }
+  }
+
+  public boolean annotationsEquals(Object other) {
+    if (other instanceof Annotatable) {
+      Annotatable that = (Annotatable) other;
+      return this.annotations.equals(that.annotations);
+    } else {
+      return false;
+    }
+  }
+
+  public int getAnnotationsHashCode() {
+    return this.annotations.hashCode();
+  }
+
+  public Iterable<Annotation> getAnnotationsIterable() {
+    return this.annotations;
+  }
+
+  public List<Annotation> getAnnotationsListClone() {
+    return new ArrayList<>(this.annotations);
+  }
+
 }

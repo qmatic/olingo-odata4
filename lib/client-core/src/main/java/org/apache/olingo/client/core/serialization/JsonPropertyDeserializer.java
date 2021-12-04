@@ -109,7 +109,7 @@ public class JsonPropertyDeserializer extends JsonDeserializer {
         } catch (final EdmPrimitiveTypeException e) {
           throw new IOException(e);
         }
-        property.getAnnotations().add(annotation);
+        property.addAnnotation(annotation);
       } else if (field.getKey().charAt(0) == '#') {
         final Operation operation = new Operation();
         operation.setMetadataAnchor(field.getKey());
